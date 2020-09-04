@@ -6,5 +6,40 @@
   </head>
   <body>
     <h1>Horaires</h1>
+    <p><a href="/horaires/create">Créer un horaire</a></p>
+    <h2>Votre recherche</h2>
+      {{ form(searchForm) }}
+    <h2>Résultat</h2>
+    <table>
+      <tr>
+        <td>Nom<a href="{{ path('sort', 'nom')}}">T</a></td>
+        <td>Commentaire</td>
+        <td>Début</td>
+        <td>Fin</td>
+        <td>Niveau de priorité</td>
+        <td>Date de création</td>
+        <td>Date de modification</td>
+        <td>Type</td>
+        <td>Modifier</td>
+        <td>Supprimer</td>
+      </tr>
+
+      {% for horaire in horaires %}
+
+        <tr>
+          <td>{{ horaire.nom }}</td>
+          <td>{{ horaire.commentaire }}</td>
+          <td>{{ horaire.dateHeureDebut | date("d/m/Y H:i") }}</td>
+          <td>{{ horaire.dateHeureFin | date("d/m/Y H:i") }}</td>
+          <td>{{ horaire.niveauPriorite}}</td>
+          <td>{{ horaire.dateCreation | date("d/m/Y") }}</td>
+          <td>{{ horaire.dateModification | date("d/m/Y") }}</td>
+          <td>{{ types[horaire.type.id-1].nom }}</td>
+          <td><a href="{{ path('edit', {'id':horaire.id })}}">Modifier</a></td>
+          <td><a href="{{ path('delete', {'id':horaire.id })}}">Supprimer</a></td>
+        </tr>
+      {% endfor %}
+
+    </table>
   </body>
 </html>

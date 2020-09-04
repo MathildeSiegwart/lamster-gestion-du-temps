@@ -1,0 +1,15 @@
+App\Entity\TypeHoraire:
+  typehoraire{1..5}:
+    nom: '<name()>'
+
+
+App\Entity\Horaire:
+  horaire{1..20}:
+    nom: '<name()>'
+    commentaire: '<text()>'
+    dateHeureDebut: '<dateTimeBetween("now","10 days")>'
+    dateHeureFin: '<dateTimeBetween($dateHeureDebut,"20 days")>'
+    niveauPriorite: '<numberBetween(0, 2)>'
+#    dateCreation: '<dateTimeBetween("-200 days", "now")>'
+#    dateModification: '<dateTimeBetween($dateCreation, "now")>'
+    type: '@typehoraire<numberBetween(1, 5)>'

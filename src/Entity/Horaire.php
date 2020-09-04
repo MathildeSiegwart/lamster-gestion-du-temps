@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\HoraireRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,6 +35,7 @@ class Horaire
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\GreaterThan(propertyPath="dateHeureDebut")
      */
     private $dateHeureFin;
 
@@ -157,6 +159,12 @@ class Horaire
         $this->type = $type;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->dateCreation = new \DateTime();
+        $this->dateModification = new \DateTime();
     }
 
 }
